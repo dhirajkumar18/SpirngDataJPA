@@ -24,7 +24,10 @@ public class OrderController {
 	
 	@Autowired
 	private OrderRepository orderRepository;
-	    
+	 
+	//to create new order
+	//http:/localhost:808/api/v1/orders
+	
 	@PostMapping("/orders")
 	public Order createOrder(@RequestBody Order order) {
 		
@@ -34,10 +37,16 @@ public class OrderController {
 		return orderRepository.save(order);
 	}
 	
+	//get all orders 
+	//http://localhsot:808/api/v1/orders
+	
 	@GetMapping("/orders")
 	public List<Order> getAllOrders(){
 		return orderRepository.findAll();
 	}
+	
+	//get order by id 
+	//http://localhsot:808/api/v1/orders/1
 	
 	@GetMapping("/orders/{id}")
 	public Order getOrderById(@PathVariable Long id) throws OrderNotFoundException {
