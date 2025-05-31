@@ -15,13 +15,17 @@ import com.dhiraj.springdata.jpa.entity.Book;
 import com.dhiraj.springdata.jpa.exception.BookNotFoundException;
 import com.dhiraj.springdata.jpa.repository.BookRepository;
 
+
+
 @RestController
 @RequestMapping("/api/v1")
 public class BookController {
 
 	@Autowired
 	private BookRepository bookRepository;
-
+    
+	// to create new books
+	//htpp://localhost:808/api/v1/books
 	@PostMapping("/books")
 	public Book createBook(@RequestBody Book book) {
 
@@ -30,12 +34,17 @@ public class BookController {
 		}
 		return bookRepository.save(book);
 	}
-
+   
+	// get all books
+	//htpp://localhost:808/api/v1/books
+	
 	@GetMapping("/books")
 	public List<Book> getAllBooks() {
 		return bookRepository.findAll();
 	}
 	
+	//get book by id 
+	//htpp://localhost:808/api/v1/books/1
 	@GetMapping("/books/{id}")
 	public Book getBookById(@PathVariable Long id) throws BookNotFoundException {
 		return bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(id));
